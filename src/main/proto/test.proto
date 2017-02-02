@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package sample;
+
+option java_multiple_files = true;
+option java_package = "org.joeyb.grpc.sample";
+option java_outer_classname = "TestProto";
+
+service TestService {
+  rpc BiDirectionalStreaming (stream TestRequest) returns (stream TestResponse) {}
+  rpc BiDirectionalStreamingError (stream TestRequest) returns (stream TestResponse) {}
+
+  rpc ClientStreaming (stream TestRequest) returns (TestResponse) {}
+  rpc ClientStreamingError (stream TestRequest) returns (TestResponse) {}
+
+  rpc ServerStreaming (TestRequest) returns (stream TestResponse) {}
+  rpc ServerStreamingError (TestRequest) returns (stream TestResponse) {}
+
+  rpc Unary (TestRequest) returns (TestResponse) {}
+  rpc UnaryError (TestRequest) returns (TestResponse) {}
+}
+
+message TestRequest {
+  string message = 1;
+}
+
+message TestResponse {
+  string message = 1;
+}
